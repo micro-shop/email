@@ -17,6 +17,16 @@ spec:
       - name: email
         image: microshop/email:latest
         env:
+         - name: SECRET_EMAIL_USER
+           valueFrom:
+            secretKeyRef:
+              name: email-credentials
+              key: email.user
+         - name: SECRET_EMAIL_PASSWORD
+           valueFrom:
+            secretKeyRef:
+              name: email-credentials
+              key: email.password
          - name: ZIPKIN
            value: zipkin.zipkin.svc.cluster.local
          - name: JAVA_OPTS
